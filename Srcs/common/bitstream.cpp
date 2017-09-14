@@ -200,6 +200,10 @@ void BitStream::writeZeroTerminatedString(const string& srcString)
 
 uint8_t BitStream::read8Bits()
 {
+    if(mStorage.size() <= mByteOffset)
+    {
+      return '\0';
+    }
     const uint8_t ret = mStorage.at(mByteOffset);
     ++mByteOffset;
     return ret;

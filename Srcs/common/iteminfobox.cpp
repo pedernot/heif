@@ -313,7 +313,13 @@ void ItemInfoEntry::parseBox(BitStream& bitstr)
 
     if (getVersion() == 0 || getVersion() == 1)
     {
-        mItemID = bitstr.read16Bits();
+        if (getVersion() == 0)
+        {
+          mItemID = bitstr.read8Bits();
+        } else
+        {
+          mItemID = bitstr.read16Bits();
+        }
         mItemProtectionIndex = bitstr.read16Bits();
         bitstr.readZeroTerminatedString(mItemName);
         bitstr.readZeroTerminatedString(mContentType);
